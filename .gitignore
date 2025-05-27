@@ -1,0 +1,8 @@
+# ignore basics files
+
+node_modules/
+*.log
+.env
+dist/
+coverage/
+*.tmp
