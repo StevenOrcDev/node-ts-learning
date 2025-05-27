@@ -8,3 +8,11 @@
 // 5. Un objet représentant un utilisateur (nom, âge)
 
 export {};
+let prenom: string;
+let age: number;
+let majeur: boolean;
+let notes: number[];
+let user :{
+    nom: string;
+    age: number;
+}
