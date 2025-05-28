@@ -19,6 +19,6 @@ type User = {
 }
 
 function printUserInfo(user: User, role: Role){
-    console.log("prenom : " + user.prenom + "nom :" + user.nom + "age : " + user.age + "mail : " + user.email );
-    console.log("role " + role)
+    console.log(`prenom : ${user.prenom}, nom: ${user.nom}, age: ${user.age}, mail: ${user.email}`);
+    console.log(`role: ${role}`);
 }

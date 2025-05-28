@@ -8,11 +8,11 @@
 // 5. Un objet représentant un utilisateur (nom, âge)
 
 export {};
-let prenom: string;
-let age: number;
-let majeur: boolean;
-let notes: number[];
-let user :{
-    nom: string;
-    age: number;
+const prenom: string = "gabo";
+const age: number = 24;
+const majeur: boolean = true;
+const notes: number[]= [15,17,5,4];
+const user = {
+    nom:  "gabsi",
+    age:  "21"
 }

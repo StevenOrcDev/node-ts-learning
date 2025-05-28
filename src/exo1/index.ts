@@ -19,7 +19,7 @@ function isEven(n: number): boolean{
     return n % 2 === 0
 }
 
-function moy(notes: number[]): number {
+function average(notes: number[]): number {
     
     if(notes.length === 0){return 0;}
     let somme = notes.reduce((acc, val) => acc + val, 0);
