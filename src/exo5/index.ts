@@ -13,8 +13,8 @@ const users = [
 
 export {};
 function majeur(): string[]{
-  let majeur = users.filter(users => users.age >= 18);
-  let res = majeur.map(user => user.name);
+  const majeur = users.filter(users => users.age >= 18);
+  const res = majeur.map(user => user.name);
   return res;
 
 }
@@ -23,11 +23,10 @@ users.sort((a, b) => b.age - a.age);
 
 function ageMoy(): number{
   let somme = users.reduce((acc , val) => acc + val.age,0);
-  let moyenne: number = somme / users.length;
-  return moyenne;
-}
+  return somme / users.length;
+ }
 
 function plusAge(){
   users.sort((a, b) => b.age - a.age);
-  console.log("Le plus age c'est " + users[0].name + "et il a " + users[0].age + "ans !");
+  console.log(`Le plus age c'est   ${users[0].name}  et il a  ${users[0].age} + ans !`);
 }

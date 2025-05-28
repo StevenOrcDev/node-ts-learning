@@ -1,4 +1,4 @@
 [
-  { "name": "Gabo", "age": 24 },
-  { "name": "gekko", "age": 52 }
+  { "id": 1,"nom": "Gabo", "age": 24 },
+  { "id": 2, "nom": "gekko", "age": 52 }
 ]

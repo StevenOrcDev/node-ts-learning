@@ -24,7 +24,7 @@ function nbPaire(): void{
 
 function fizzBuzz(): void{
     for(let i = 1 ; i<= 50; i++){
-        console.log("FizzBuzz" + i);
+        console.log(`FizzBuzz + ${i}`);
     }
 }
 
