@@ -13,29 +13,21 @@ const users = [
 
 export {};
 function majeur(): string[]{
-
-  let res: string[]= [];
-  for(let i=0; i< users.length; i++){
-    if(users[i].age >= 18 ){
-      res.push(users[i].name);
-    }
-    
-  }
+  let majeur = users.filter(users => users.age >= 18);
+  let res = majeur.map(user => user.name);
   return res;
+
 }
 
 users.sort((a, b) => b.age - a.age);
 
-function agemoy(): number{
-  let somme = 0;
-  for(let i=0;i<users.length;i++){
-    somme += users[i].age;
-  }
+function ageMoy(): number{
+  let somme = users.reduce((acc , val) => acc + val.age,0);
   let moyenne: number = somme / users.length;
   return moyenne;
 }
 
-function plusage(){
+function plusAge(){
   users.sort((a, b) => b.age - a.age);
   console.log("Le plus age c'est " + users[0].name + "et il a " + users[0].age + "ans !");
 }

@@ -8,27 +8,21 @@
 
 export {};
 function  bjr(name: string): string{
-    return "bonjour , " + name + "!";
+    return `bonjour , ${name} !`;
 }
 
-function addition(a: number, b: number): number { 
+function sum(a: number, b: number): number { 
     return a + b ;
 }
 
-function estPaire(n: number): boolean{
-    if(n % 2 === 0){
-        return true;
-    }
-    return false;
+function isEven(n: number): boolean{
+    return n % 2 === 0
 }
 
 function moy(notes: number[]): number {
     
     if(notes.length === 0){return 0;}
-    let somme = 0;
-    for(let i=0;i < notes.length;i++){
-        somme += notes[i];
-    }
+    let somme = notes.reduce((acc, val) => acc + val, 0);
     const moyenne = somme / notes.length;
     return moyenne; 
 }

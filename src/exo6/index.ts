@@ -12,10 +12,17 @@ let user = JSON.parse(fichier);
 
 // ajout 
 user.push({"name": "mika", "age": 41});
+
 // supprimer user
 user.splice(0, 1);
+
 // lister les users
-function liste() { for(let i=0; i < user.length; i++){console.log(user[i])}};
+function listeB(){
+    user.forEach(element => {
+        console.log(element);
+    });
+}
+
 // chercher par nom
 function cherche(nom: string): number{
     for(let i =0;i<user.length;i++){
