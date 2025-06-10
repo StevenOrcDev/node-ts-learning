@@ -4,12 +4,18 @@ import { Person } from "../entities/Person";
 
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+  const persRep = AppDataSource.getRepository(Person);
+  const persons = await persRep.find();
+  res.json(persons);
   res.json({ message: "Get all persons" });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
+  const persRep = AppDataSource.getRepository(Person);
+  const person = await persRep.findOneBy({id : parseInt(id)});
+  res.json(person);
   res.json({ message: `Get person with id ${id}` });
 });
 
@@ -27,17 +33,22 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { firstName, lastName, age, email } = req.body;
+  const persRep = AppDataSource.getRepository(Person)
+  await persRep.update(id, { firstName, lastName, age, email });
   res.json({
     message: `Update person with id ${id}`,
     person: { firstName, lastName, age, email },
   });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
+  const persReo = AppDataSource.getRepository(Person);
+
+  await persReo.delete(id);
   res.json({ message: `Delete person with id ${id}` });
 });
 
