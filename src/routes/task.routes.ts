@@ -2,52 +2,52 @@ import { Router } from "express";
 import { Task } from "../entities";
 import { AppDataSource } from "../db/dbConnection";
 
-const route = Router();
+const router = Router();
 
-route.get("/" , async (req,res) => {
+router.get("/" , async (req,res) => {
     try{
         const taskRep = AppDataSource.getRepository(Task);
-        const taskAll = await taskRep.find();
-        res.json({message : "select all task", taskAll});
+        const tasks = await taskRep.find();
+        res.json({message : "select all task", tasks});
     }catch(error){
         res.status(404).json({error : "not found"})
     }
 })
 
-route.get("/:id", async (req,res) => {
+router.get("/:id", async (req,res) => {
    
    try{
     const { id } = req.params;
     const taskRep = AppDataSource.getRepository(Task);
-    const taskRes = taskRep.findOneBy({id : parseInt(id)});
-    if(!taskRes){
-        res.status(404).json({message : "error not found"});
+    const task = taskRep.findOneBy({id : parseInt(id)});
+    if(!task){
+        res.status(404).json({message : "task no found with the given id : {id}"});
     }
-    res.json({message: "Task found", taskRes});
+    res.json({message: "Task found", task});
     } catch(error){
         res.status(404).json({error : "Error for the get by id"})
     }
 })
 
-route.post("/" , async (req,res) => {
+router.post("/" , async (req,res) => {
     try{
         const {description , isDone  } = req.body;
         const taskRep = AppDataSource.getRepository(Task);
-        const taskNew = await taskRep.create({ description, isDone });
-        await taskRep.save(taskNew);
-        res.json({message : "Task created", taskNew})
+        const newTask = await taskRep.create({ description, isDone });
+        await taskRep.save(newTask);
+        res.json({message : "Task created", newTask})
     }catch(error){
-        res.status(404).json({error : "Unvaible information"})
+        res.status(404).json({error : "Unavalaible information"})
     }
 })
 
-route.put("/:id" , async (req,res) => {
+router.put("/:id" , async (req,res) => {
     try{
         const {id } = req.params;
         const { description , isDone } = req.body;
         const taskRep = AppDataSource.getRepository(Task);
-        const taskUp = await taskRep.findOneBy({id : parseInt(id)});
-        if(!taskUp){
+        const updatedTask = await taskRep.findOneBy({id : parseInt(id)});
+        if(!updatedTask){
             res.status(404).json({message : "Not found"});
         }
         await taskRep.update(id , { description , isDone});
@@ -57,13 +57,13 @@ route.put("/:id" , async (req,res) => {
     }
 })
 
-route.delete("/:id" , async (req,res) => {
+router.delete("/:id" , async (req,res) => {
     try{
         const { id } = req.params;
         const taskRep = AppDataSource.getRepository(Task);
         const taskDel = await taskRep.findOneBy({id : parseInt(id)});
         if(!taskDel){
-            res.status(404).json({message : " Not found "})
+            res.status(404).json({message : " Not found task whith the given id : {id} "})
         }
         taskRep.delete(id);
         res.json({message: "Task deleted" , taskDel})
@@ -72,4 +72,4 @@ route.delete("/:id" , async (req,res) => {
     }
 })
 
-export const taskRoutes = route ;
+export const taskRoutes = router ;
