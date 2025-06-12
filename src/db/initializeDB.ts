@@ -5,6 +5,6 @@ export const initializeDB = async () => {
     await AppDataSource.initialize();
     console.log("Database connection established successfully.");
   } catch (error) {
-    process.exit(1); // Arrête l'application en cas d'échec de la connexion
+    process.exit(1);
   }
 };

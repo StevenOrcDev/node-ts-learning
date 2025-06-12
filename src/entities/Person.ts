@@ -1,4 +1,3 @@
-// src/entities/Person.ts
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Task } from "./Task";
 
