@@ -2,9 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import cors from 'cors';
+import { personRoutes, taskRoutes } from './routes';
 import { initializeDB } from './db/initializeDB';
-import { personRoutes } from './routes';
-import { taskRoutes } from '@routes/task.routes';
 
 dotenv.config();
 
@@ -21,12 +20,12 @@ app.use('/api/v1/persons', personRoutes);
 app.use('/api/v1/tasks', taskRoutes);
 
 // Health check route
-app.get('/health', (_req, res) => {
+app.get('/health', (req, res) => {
   res.status(200).json({ status: 'UP' });
 });
 
 // not found route
-app.use((_req, res) => {
+app.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
 });
 

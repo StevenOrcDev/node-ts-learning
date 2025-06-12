@@ -1,1 +1,2 @@
-export * from './person.controllers';
+export * from './person.controller';
+export * from './task.controller';

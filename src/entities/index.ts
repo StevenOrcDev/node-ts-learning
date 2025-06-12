@@ -1,2 +1,2 @@
-export * from "./Person";
-export * from "./Task";
+export * from './Person';
+export * from './Task';

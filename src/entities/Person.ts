@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Task } from "./Task";
+// src/entities/Person.ts
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Task } from './Task';
 
 @Entity()
 export class Person {
