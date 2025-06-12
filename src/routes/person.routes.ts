@@ -1,12 +1,11 @@
 import { Router } from 'express';
-import { createPerson, deletePerson, getPersonById, getPersons, updatePerson } from '@controllers/index';
+import { postPerson, deleteById, getPerson, getPersonById, putPerson } from '../controllers/person.controller';
 
 const router = Router();
 
-router.get('/', getPersons);
+router.get('/', getPerson);
 router.get('/:id', getPersonById);
-router.post('/', createPerson);
-router.put('/:id', updatePerson);
-router.delete('/:id', deletePerson);
-
+router.post('/', postPerson);
+router.put('/:id', putPerson);
+router.delete('/:id', deleteById);
 export const personRoutes = router;
