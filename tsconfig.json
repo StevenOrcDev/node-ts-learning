@@ -21,7 +21,8 @@
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
       "@services/*": ["./src/services/*"],
-      "@routes/*": ["./src/routes/*"]
+      "@routes/*": ["./src/routes/*"],
+      "@dtos/*": ["./src/dtos/*"]
     }
   },
   "include": ["src/**/*.ts"],

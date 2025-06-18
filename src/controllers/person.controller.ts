@@ -1,7 +1,7 @@
 import { AppDataSource } from '../db/dbConnection';
 import { Person } from '../entities';
 
-export async function getPerson(req, res) {
+export async function getPerson(_req, res) {
   try {
     const personRepo = AppDataSource.getRepository(Person);
     const persons = await personRepo.find();
