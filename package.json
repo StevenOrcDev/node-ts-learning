@@ -24,7 +24,7 @@
     "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0",
     "typeorm": "^0.3.24",
-    "zod": "^3.25.63"
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@types/express": "^5.0.2",
