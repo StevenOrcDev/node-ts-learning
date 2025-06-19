@@ -1,4 +1,4 @@
-export enum Location {
+export enum RequestDataSource {
   PARAM = 'param',
   PARAMBODY = 'parambody',
   BODY = 'body',

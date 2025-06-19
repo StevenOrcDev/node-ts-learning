@@ -1,28 +1,37 @@
 import { Request, Response, NextFunction } from 'express';
-import { Location } from '../constants/location';
-import { checkIfIsOk } from '../helpers/check';
+import { RequestDataSource } from '../constants/location';
+import { isDtoValid } from '../helpers/check';
+import { ZodTypeAny } from 'zod';
 
-export const validateDto = (dtoClass: any, location: Location) => (req: Request, res: Response, next: NextFunction) => {
-  if (location === Location.PARAM) {
-    const param = dtoClass.safeParse(req.params);
-    if (!checkIfIsOk(param, res)) {
-      return;
+export const validateDto =
+  (dtoClass: ZodTypeAny, requestDataSource: RequestDataSource) => (req: Request, res: Response, next: NextFunction) => {
+    if (requestDataSource === RequestDataSource.PARAM) {
+      const param = dtoClass.safeParse(req.params);
+      if (!isDtoValid(param, res)) {
+        return;
+      }
+    } else if (requestDataSource === RequestDataSource.PARAMBODY) {
+      const param = dtoClass.safeParse(req.params);
+      const result = dtoClass.safeParse(req.body);
+      if (!result.success || !param.success) {
+        if (!result.success) {
+          res.status(400).json({
+            message: 'error body',
+            errors: result.error.format(),
+          });
+        } else if (!param.success) {
+          res.status(400).json({
+            message: 'error param',
+            errors: param.error.format(),
+          });
+          return;
+        }
+      }
+    } else if (requestDataSource === RequestDataSource.BODY) {
+      const result = dtoClass.safeParse(req.body);
+      if (!isDtoValid(result, res)) {
+        return;
+      }
     }
-  } else if (location === Location.PARAMBODY) {
-    const param = dtoClass.safeParse(req.params);
-    const result = dtoClass.safeParse(req.body);
-    if (!result.success || !param.success) {
-      res.status(400).json({
-        message: 'Validation error',
-        errors: result.error.format(),
-      });
-      return;
-    }
-  } else if (location === Location.BODY) {
-    const result = dtoClass.safeParse(req.body);
-    if (!checkIfIsOk(result, res)) {
-      return;
-    }
-  }
-  next();
-};
+    next();
+  };

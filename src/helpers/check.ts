@@ -1,6 +1,6 @@
 import { Response } from 'express';
 
-export function checkIfIsOk(param: any, res: Response): boolean {
+export function isDtoValid(param: any, res: Response): boolean {
   if (!param.success) {
     res.status(400).json({
       message: 'Validation error',
