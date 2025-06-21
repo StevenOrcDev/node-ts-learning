@@ -12,6 +12,6 @@ export class Task {
   @Column({ default: false })
   isDone: boolean;
 
-  @ManyToOne(() => Person, (person) => person.tasks)
+  @ManyToOne(() => Person, (person) => person.tasks, { nullable: true })
   person: Person;
 }
