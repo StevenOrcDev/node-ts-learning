@@ -13,13 +13,13 @@ export async function getTask(_req, res) {
 export async function getTaskById(req, res) {
   try {
     const id = Number(req.params.id);
-    const task = taskService.getTaskById(id);
+    const task = await taskService.getTaskById(id);
 
     if (!task) {
       res.status(404).json({ error: 'task no found ' });
     }
 
-    res.json({ message: 'Task found', task });
+    res.json({ task });
   } catch (error) {
     res.status(404).json({ error: 'Error for the get by id' });
   }
