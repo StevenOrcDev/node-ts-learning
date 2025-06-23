@@ -1,11 +1,11 @@
 import { Person, Task } from '../../entities';
 import { AppDataSource } from '../../db/dbConnection';
 import { CreateTaskDto, UpdateTaskDto } from '@dtos/tasks';
+import { PersonNotFoundError } from '../../personNotFound/personNotFound';
 
 export async function getAllTask(): Promise<Task[]> {
   const taskRepo = AppDataSource.getRepository(Task);
-
-  return taskRepo.find();
+  return taskRepo.find({ relations: { person: true } });
 }
 
 export async function getTaskById(id: number): Promise<Task | null> {
@@ -21,7 +21,9 @@ export async function createTask(data: CreateTaskDto): Promise<Task> {
 
   if (data.personId) {
     const person = await personRepo.findOneBy({ id: Number(data.personId) });
-    if (!person) throw new Error(`Person ${data.personId} not found`);
+    if (!person) {
+      throw new PersonNotFoundError(String(data.personId));
+    }
     task.person = person;
   }
 
@@ -33,14 +35,18 @@ export async function updateTask(id: number, data: UpdateTaskDto): Promise<Task 
   const personRepo = AppDataSource.getRepository(Person);
 
   const task = await taskRepo.findOneBy({ id });
-  if (!task) return null;
+  if (!task) {
+    return null;
+  }
 
   if (data.description !== undefined) task.description = data.description;
   if (data.isDone !== undefined) task.isDone = data.isDone;
 
   if (data.personId !== undefined) {
     const person = await personRepo.findOneBy({ id: data.personId });
-    if (!person) throw new Error(`Person ${data.personId} not found`);
+    if (!person) {
+      throw new PersonNotFoundError(String(data.personId));
+    }
     task.person = person;
   }
 
