@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { personRoutes, taskRoutes } from './routes';
 import { initializeDB } from './db/initializeDB';
+import { errorHandler } from './handler/handlerError';
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ app.use(express.json());
 
 app.use('/api/v1/persons', personRoutes);
 app.use('/api/v1/tasks', taskRoutes);
+
+app.use(errorHandler);
 
 // Health check route
 app.get('/health', (_req, res) => {

@@ -25,14 +25,14 @@ export async function getTaskById(req, res) {
   }
 }
 
-export async function postTask(req, res) {
+export async function postTask(req, res, next) {
   try {
     const { description, isDone, personId } = req.body;
     const task = await taskService.createTask({ description, isDone, personId });
 
-    res.status(500).json(task);
+    res.status(201).json(task);
   } catch (error) {
-    res.status(404).json({ error: 'Unavalaible information' });
+    next(error);
   }
 }
 
