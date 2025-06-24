@@ -53,7 +53,7 @@ export async function putTask(req, res) {
   }
 }
 
-export async function deleteByIdTask(req, res) {
+export async function deleteByIdTask(req, res, next) {
   try {
     const id = Number(req.params.id);
     const taskDel = await taskService.deleteTask(id);
@@ -64,6 +64,6 @@ export async function deleteByIdTask(req, res) {
 
     res.json({ message: 'Task deleted', taskDel });
   } catch (error) {
-    res.status(500).json({ error: 'delet error' });
+    next(error);
   }
 }
