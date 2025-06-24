@@ -36,7 +36,7 @@ export async function postTask(req, res, next) {
   }
 }
 
-export async function putTask(req, res) {
+export async function putTask(req, res, next) {
   try {
     const id = Number(req.params.id);
     const { description, isDone, personId } = req.body;
@@ -49,7 +49,7 @@ export async function putTask(req, res) {
 
     res.json(updatedTask);
   } catch (error) {
-    res.status(500).json({ error: 'put error' });
+    next(error);
   }
 }
 

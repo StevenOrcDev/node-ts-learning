@@ -36,7 +36,7 @@ export async function updateTask(id: number, data: UpdateTaskDto): Promise<Task 
 
   const task = await taskRepo.findOneBy({ id });
   if (!task) {
-    return null;
+    throw new TaskNotFoundError(String(id));
   }
 
   if (data.description) task.description = data.description;
